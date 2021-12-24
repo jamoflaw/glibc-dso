@@ -2,6 +2,7 @@
 
 # Exit on errs
 set -e
+set -x
 
 # Download source
 apt-get source libc6
