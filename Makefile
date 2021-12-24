@@ -23,7 +23,7 @@ build-i386:
 
 	# Prepare build dir
 	mkdir -p build-i386
-	cp build.sh build/
+	cp build-i386.sh build/
 	cp glibc-dso.patch build/
 
 	# Build using docker
