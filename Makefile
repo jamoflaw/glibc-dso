@@ -27,7 +27,7 @@ build-i386:
 	cp glibc-dso.patch build-i386/
 
 	# Build using docker
-	docker run --rm -v $$(pwd)/build-i386:/build -w /build --user $$(id -u) --privileged $(IMAGE_NAME) ./build-i386.sh
+	docker run --rm -v $$(pwd)/build-i386:/build -w /build --privileged $(IMAGE_NAME) ./build-i386.sh
 
 	mkdir -p output
 	cp build-i386/*.deb output/
