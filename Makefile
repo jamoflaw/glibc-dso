@@ -23,8 +23,8 @@ build-i386:
 
 	# Prepare build dir
 	mkdir -p build-i386
-	cp build-i386.sh build/
-	cp glibc-dso.patch build/
+	cp build-i386.sh build-i386/
+	cp glibc-dso.patch build-i386/
 
 	# Build using docker
 	docker run --rm -v $$(pwd)/build-i386:/build -w /build --user $$(id -u) --privileged $(IMAGE_NAME) ./build-i386.sh
