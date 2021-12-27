@@ -1,36 +1,22 @@
-IMAGE_NAME=temp-ubuntu-glibc
+all: build_i386 build_amd64
 
-.PHONY: build-amd64
-build-amd64:
-	# Build a temp image
-	docker build . -t $(IMAGE_NAME)
-
-	# Prepare build dir
-	mkdir -p build-amd64
-	cp build-amd64.sh build-amd64/
-	cp glibc-dso.patch build-amd64/
-
-	# Build using docker
-	docker run --rm -v $$(pwd)/build-amd64:/build -w /build --user $$(id -u) --privileged $(IMAGE_NAME) ./build-amd64.sh
-
-	mkdir -p output
-	cp build-amd64/*.deb output/
-
-.PHONY: build-i386
-build-i386:
-	# Build a temp image
-	docker build . -t $(IMAGE_NAME)
-
-	# Prepare build dir
-	mkdir -p build-i386
-	cp build-i386.sh build-i386/
-	cp glibc-dso.patch build-i386/
-
-	# Build using docker
-	docker run --rm -v $$(pwd)/build-i386:/build -w /build --privileged $(IMAGE_NAME) ./build-i386.sh
-
-	mkdir -p output
-	cp build-i386/*.deb output/
+DIST=focal
+ARCH=amd64
+BUILD_DIR=/tmp/build-$(DIST)-$(ARCH)
+OUTPUT_DIR=/vagrant/output/$(DIST)-$(ARCH)
 
 clean:
-	rm -rf build-amd64 build-i386
+	rm -rf output
+	vagrant destroy --force
+
+vagrant_up:
+	vagrant up --provider=virtualbox
+
+build: vagrant_up
+	vagrant ssh -c "DIST=$(DIST) ARCH=$(ARCH) BUILD_DIR=$(BUILD_DIR) OUTPUT_DIR=$(OUTPUT_DIR) /vagrant/build.sh"
+
+build_i386:
+	$(MAKE) build ARCH=i386
+
+build_amd64:
+	$(MAKE) build ARCH=amd64
