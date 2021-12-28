@@ -2,7 +2,7 @@ all: build_i386 build_amd64
 
 DIST=focal
 ARCH=amd64
-BUILD_DIR=/tmp/build-$(DIST)-$(ARCH)
+BUILD_DIR=~/build-$(DIST)-$(ARCH)
 OUTPUT_DIR=/vagrant/output/$(DIST)-$(ARCH)
 
 clean:
