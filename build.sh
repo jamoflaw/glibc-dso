@@ -19,7 +19,7 @@ apt-get source libc6
 # Reversion
 pushd glibc-2.31
 dpkg-checkbuilddeps
-/usr/bin/dch -n "DSO performance patch"
+/usr/bin/dch "DSO performance patch" -ldso
 EDITOR=/bin/true dpkg-source -q --commit . "dsopatch"
 
 # Patch the installation
