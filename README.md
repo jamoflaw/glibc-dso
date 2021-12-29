@@ -47,3 +47,13 @@ Now add the path to a file in `/etc/apt/sources.list.d/glibc-dso.list`
 ```text
 deb [trusted=yes] file:///path/to/debs ./
 ```
+
+## Enable the Patch
+
+The patch does not set itself to the default sorting algorithm instead you need to specicy the env var:
+
+```bash
+GLIBC_TUNABLES=glibc.rtld.dynamic_sort=2
+```
+
+To ensure its enabled.
