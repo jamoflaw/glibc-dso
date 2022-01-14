@@ -33,7 +33,7 @@ Once installed you can install via `dpkg` direct (though I would personally use 
 
 ### Using apt
 
-To use apt createa directory structure for the resulting debs
+To use apt create a directory structure for the resulting debs
 
 ```bash
 mkdir -p debs/pool/main
