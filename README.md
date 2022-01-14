@@ -37,7 +37,7 @@ To use apt createa directory structure for the resulting debs
 
 ```bash
 mkdir -p debs/pool/main
-cp -R /output/* debs/pool/main
+cp -R ./output/* debs/pool/main
 cd debs
 dpkg-scanpackages --multiversion . 2>/dev/null > Packages
 ```
